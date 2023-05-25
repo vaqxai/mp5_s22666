@@ -2,8 +2,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.sqlite.core.DB;
-
 public class Officer extends Soldier {
 
     private String rank;
