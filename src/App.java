@@ -10,15 +10,15 @@ public class App {
 
         // End database setup
 
-        // Klasa
+            // Klasa
 
-        List<Soldier> jan_kowalskis = Soldier.get("Jan", "Kowalski");
-        Soldier jan_kowalski = null;
-        if (jan_kowalskis.size() == 0) {
-            jan_kowalski = new Soldier("Jan", "Kowalski");
-        } else {
-            jan_kowalski = jan_kowalskis.get(0);
-        }
+            List<Soldier> jan_kowalskis = Soldier.get("Jan", "Kowalski");
+            Soldier jan_kowalski = null;
+            if (jan_kowalskis.size() == 0) {
+                jan_kowalski = new Soldier("Jan", "Kowalski");
+            } else {
+                jan_kowalski = jan_kowalskis.get(0);
+            }
 
         List<Soldier> adam_kowalskis = Soldier.get("Adam", "Kowalski");
         Soldier adam_kowalski = null;
@@ -70,6 +70,17 @@ public class App {
 
         System.out.println(officer.GetDBID());
 
+        // ?
+
+        System.out.println("Pre create soldier");
+        Soldier s = new Soldier("xxx", "DDDD");
+
+        System.out.println("Soldier create over");
+        List<Squad> alpha_s = Squad.get("Alpha");
+        System.out.println("Squad get");
+        Squad alpha2 = alpha_s.get(0);
+
+        alpha2.addSoldier(s);
 
     }
 }

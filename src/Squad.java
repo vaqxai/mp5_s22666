@@ -183,10 +183,13 @@ public class Squad {
         if (soldier == null) return;
         if (members.contains(soldier)) return;
 
+        System.out.println("Test");
+
         var conn = DBInterface.connect();
         var stat = conn.prepareStatement("INSERT INTO SquadSoldier (SoldierID, SquadID) VALUES (?, ?)");
         stat.setInt(1, soldier.GetDBID());
         stat.setInt(2, database_ID);
+        stat.executeUpdate();
 
         members.add(soldier);
         soldier.setSquad(this);

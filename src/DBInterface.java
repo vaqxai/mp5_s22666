@@ -28,8 +28,8 @@ public class DBInterface {
         var stat = conn.prepareStatement("""
                CREATE TABLE IF NOT EXISTS Soldier (
                 ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                Name TEXT,
-                Surname TEXT
+                Name TEXT NOT NULL,
+                Surname TEXT NOT NULL
                )
         """);
         stat.executeUpdate();
@@ -37,7 +37,7 @@ public class DBInterface {
         stat = conn.prepareStatement("""
                CREATE TABLE IF NOT EXISTS Squad (
                 ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                Name TEXT
+                Name TEXT NOT NULL
                )
         """);
         stat.executeUpdate();
@@ -45,8 +45,8 @@ public class DBInterface {
         stat = conn.prepareStatement("""
                CREATE TABLE IF NOT EXISTS SquadSoldier (
                 ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                SquadID INTEGER,
-                SoldierID INTEGER,
+                SquadID INTEGER NOT NULL,
+                SoldierID INTEGER NOT NULL,
                 FOREIGN KEY(SquadID) REFERENCES Squad(ID),
                 FOREIGN KEY(SoldierID) REFERENCES Soldier(ID)
                )
@@ -56,7 +56,7 @@ public class DBInterface {
         stat = conn.prepareStatement("""
                CREATE TABLE IF NOT EXISTS Officer (
                 SoldierID INTEGER PRIMARY KEY,
-                Rank TEXT,
+                Rank TEXT NOT NULL,
                 FOREIGN KEY(SoldierID) REFERENCES Soldier(ID)
                )
         """);

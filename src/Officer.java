@@ -106,6 +106,7 @@ public class Officer extends Soldier {
         stat.setString(1, newRank);
         stat.setInt(2, GetDBID());
         stat.executeUpdate();
+        conn.close();
 
         rank = newRank;
     }

@@ -66,6 +66,7 @@ public class Soldier {
         stat_ins.setString(1, name);
         stat_ins.setString(2, surname);
         stat_ins.executeUpdate();
+
         var res = conn.prepareStatement("SELECT last_insert_rowid() FROM Soldier").executeQuery();
         res.next();
         var ID = res.getInt(1);
@@ -103,7 +104,10 @@ public class Soldier {
 
         if (!res.next()) return null;
 
-        return new Soldier(res.getString(2), res.getString(3), res.getInt(1));
+        var soldier = new Soldier(res.getString(2), res.getString(3), res.getInt(1));
+        conn.close();
+
+        return soldier;
     }
 
     /**
@@ -171,8 +175,11 @@ public class Soldier {
         if (!res.next()) throw new RuntimeException("I told you 'Use the functions in the Squad class instead.'");
         // Somebody will complain about the association only being editable from one side so I AM gonna add manipulation on this side
         var res_squ_id = res.getInt(1);
-        if (res_squ_id != newSquad.GetDBID()) return; // this function is only for estabilshing links I N T E R N A L L Y
-
+        if (res_squ_id != newSquad.GetDBID()) {
+            conn.close();
+            return;
+        } // this function is only for estabilshing links I N T E R N A L L Y
+        conn.close();
 
         this.squad = newSquad;
     }
